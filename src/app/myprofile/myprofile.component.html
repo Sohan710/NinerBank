@@ -150,10 +150,10 @@
                             <div>
                                 <img class="profile-pic"
                                     src="https://therichpost.com/wp-content/uploads/2021/03/avatar6.png" alt="profile">
-                                <span class="profile-name">Soham Gokhle</span>
+                                <span *ngIf="userData" class="profile-name">{{userData.firstname}} {{userData.lastname}}</span>
 
                             </div>
-                            <span class="profile-tag">Graduate Student at UNC Charlotte | Computer Science </span>
+                            <span *ngIf="userData" class="profile-tag">{{userData.id}}</span>
                             <p class="lead">
                                 <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Edit Profile</button>
                             </p>

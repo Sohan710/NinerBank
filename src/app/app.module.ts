@@ -19,6 +19,7 @@ import { CourseElecComponent } from './course-elec/course-elec.component';
 import { CourseCompComponent } from './course-comp/course-comp.component';
 import { CourseItisComponent } from './course-itis/course-itis.component';
 import { CourseDsbaComponent } from './course-dsba/course-dsba.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { CourseDsbaComponent } from './course-dsba/course-dsba.component';
     MdbCheckboxModule,
     AppRoutingModule,
     FormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

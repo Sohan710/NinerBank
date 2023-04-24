@@ -26,6 +26,7 @@ const routes: Routes =
     {path:'coursecomp',component:CourseCompComponent},
     {path:'coursedsba',component:CourseDsbaComponent},
     {path:'courseitis',component:CourseItisComponent},
+    { path: 'myprofile/:id', component: MyprofileComponent },
 
 ];
 
