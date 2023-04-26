@@ -20,6 +20,13 @@ import { CourseCompComponent } from './course-comp/course-comp.component';
 import { CourseItisComponent } from './course-itis/course-itis.component';
 import { CourseDsbaComponent } from './course-dsba/course-dsba.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ResumebuildComponent } from './resumebuild/resumebuild.component';
+import { InterviewtipComponent } from './interviewtip/interviewtip.component';
+import { SelfassessmentComponent } from './selfassessment/selfassessment.component';
+import { StrategiesjobComponent } from './strategiesjob/strategiesjob.component';
+import { RecommenderpageComponent } from './recommenderpage/recommenderpage.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { PythonScriptService } from './python-script.service';
 
 @NgModule({
   declarations: [
@@ -36,7 +43,13 @@ import { HttpClientModule } from '@angular/common/http';
     CourseElecComponent,
     CourseCompComponent,
     CourseItisComponent,
-    CourseDsbaComponent
+    CourseDsbaComponent,
+    ResumebuildComponent,
+    InterviewtipComponent,
+    SelfassessmentComponent,
+    StrategiesjobComponent,
+    RecommenderpageComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -44,9 +57,11 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     FormsModule,
     FontAwesomeModule,
-    HttpClientModule
+    ReactiveFormsModule,
+    HttpClientModule,
+    
   ],
-  providers: [],
+  providers: [PythonScriptService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,17 @@
+.display-4{
+    color: #005035;
+    font-size: 80px;
+    font-style: bold;
+    font-weight: 700;
+    font-family: Calluna;
+}
+.lead{
+    font-weight: 500;
+}
+.lead1{
+    font-weight: 600;
+}
+.card{
+    margin-left: 40px;
+    margin-right: 40px;
+}

@@ -11,6 +11,12 @@ import { CourseElecComponent } from './course-elec/course-elec.component';
 import { CourseCompComponent } from './course-comp/course-comp.component';
 import { CourseDsbaComponent } from './course-dsba/course-dsba.component';
 import { CourseItisComponent } from './course-itis/course-itis.component';
+import { ResumebuildComponent } from './resumebuild/resumebuild.component';
+import { SelfassessmentComponent } from './selfassessment/selfassessment.component';
+import { StrategiesjobComponent } from './strategiesjob/strategiesjob.component';
+import { InterviewtipComponent } from './interviewtip/interviewtip.component';
+import { RecommenderpageComponent } from './recommenderpage/recommenderpage.component';
+
 
 const routes: Routes = 
 [  
@@ -26,8 +32,12 @@ const routes: Routes =
     {path:'coursecomp',component:CourseCompComponent},
     {path:'coursedsba',component:CourseDsbaComponent},
     {path:'courseitis',component:CourseItisComponent},
-    { path: 'myprofile/:id', component: MyprofileComponent },
-
+    {path: 'myprofile/:id', component: MyprofileComponent},
+    {path:'resumebuild',component:ResumebuildComponent},
+    {path:'selfassessment',component:SelfassessmentComponent},
+    {path:'strategiesjob',component:StrategiesjobComponent},
+    {path:'interviewtop',component:InterviewtipComponent},
+    {path:'recommenderpage',component:RecommenderpageComponent},
 ];
 
 @NgModule({

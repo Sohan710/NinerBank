@@ -60,7 +60,8 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "niners_edu:build:production"
+              "browserTarget": "niners_edu:build:production",
+              "proxyConfig": "proxy.conf.json"
             },
             "development": {
               "browserTarget": "niners_edu:build:development"
