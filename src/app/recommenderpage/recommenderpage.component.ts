@@ -14,7 +14,21 @@ export class RecommenderpageComponent {
     this.pythonScriptService.getPythonScriptOutput({ INTERESTSUBJECTS: 'YourSearchTerm' }).subscribe(
       (data) => {
         console.log(data);
-        // Process the data here as needed.
+        if (data.status === 'Success') {
+          const recommendedCourses = data.data;
+  
+          let outputHtml = '';
+          recommendedCourses.forEach((course: { [x: string]: any; }) => {
+            outputHtml += `<div>
+              <h3>${course['Course Name']}</h3>
+              <p>Skills: ${course['Skills']}</p>
+            </div>`;
+          });
+  
+          this.output = outputHtml;
+        } else {
+          this.output = data.message;
+        }
       },
       (error) => {
         console.error(error);
