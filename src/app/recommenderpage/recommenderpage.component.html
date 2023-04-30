@@ -1,3 +1,14 @@
+<style>
+  button {
+    background-color: #A49665;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    opacity: 0.9;
+}
+</style>
 <div class="jumbotron">
   <h1 class="display-4">Course Recommendation</h1>
   <p class="lead">These recommended courses are educational programs that are suggested to an individual based on their interests, 
@@ -8,6 +19,10 @@
       <br>
 </div>
 <div class="output-container" [innerHTML]="output"></div>
+<div class="text-center text-lg-start mt-4 pt-2" style="margin-left: 20px; font-weight: 500; margin-right: 20px;">
+  <button type="button" class="btn btn-success btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem; margin-right: 10px;" routerLink="/courseresg">Go Back to Recommendation Form</button>
+  <button type="button" class="btn btn-success btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem;" routerLink="/courseadv">Go to the Career Advice Page</button>
+</div>
 </div>
 <div>
 <footer class="bg-light text-center text-lg-start">
