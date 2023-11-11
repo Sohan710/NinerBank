@@ -1,0 +1,46 @@
+<style>
+  form {
+    overflow: hidden; /* Hide scrollbars */
+  }
+</style>
+
+<section class="vh-100">
+  <div class="container-fluid h-custom">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-md-9 col-lg-6 col-xl-5">
+        <img src="../../assets/login.svg"
+          class="img-fluid" alt="Sample image" width="800" height="800" style="margin-top: 150px;">
+      </div>
+      <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+        <form (ngSubmit)="login(loginForm)" #loginForm="ngForm">
+          <img src="../../assets/logo0.png"
+            class="img-fluid1" alt="Sample image" width="150" height="150" style="margin-left: 250px; margin-top: 30px;">
+          <div class="divider d-flex align-items-center my-4">
+            <p class="text-center fw-bold mx-3 mb-0" style="font-size: 40px; font-weight: 700;">Login into your 49er's Account</p>
+          </div>
+
+          <!-- Email input -->
+          <div class="form-outline mb-4">
+            <input type="email" id="email" class="form-control form-control-lg"
+              placeholder="Enter a valid email address" ngModel name="email" required />
+            <label class="form-label" for="email">Email address</label>
+          </div>
+
+          <!-- Password input -->
+          <div class="form-outline mb-3">
+            <input type="password" id="password" class="form-control form-control-lg"
+              placeholder="Enter password" ngModel name="password" required />
+            <label class="form-label" for="password">Password</label>
+          </div>
+
+          <div class="text-center text-lg-start mt-4 pt-2">
+            <button type="submit" class="btn btn-primary btn-lg"
+              style="padding-left: 2.5rem; padding-right: 2.5rem; background-color: #A49665; border-color: #A49665;">Login</button>
+            <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a routerLink="/registration" href="#!"
+                class="link-danger">Register</a></p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
