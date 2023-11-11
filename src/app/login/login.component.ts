@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../auth.service'; // Update the path accordingly
 
 @Component({
   selector: 'app-login',
@@ -10,30 +10,19 @@ import { AuthService } from '../auth.service';
 })
 export class LoginComponent {
 
-  email: string = '';
-  password: string = '';
+  constructor(private authService: AuthService, private router: Router) {}
 
-  errorMessage: string = ""; // Fixed the typo
-
-  constructor(private authService: AuthService, private router: Router, private http: HttpClient) { }
-
-  login() {
-    console.log(this.email);
-    console.log(this.password);
-
-    this.authService.login(this.email, this.password).subscribe(
-      (response: any) => { // Added the 'any' type for the response
-        if (response.success) {
-          this.authService.setLoggedInUserId(response.userId); // Use 'userId' instead of '_id'
-          this.router.navigateByUrl('/myprofile');
-        } else {
-          alert("Login Failed"); // Changed the message to 'Login Failed'
+  login(form: NgForm) {
+    if (form.valid) {
+      this.authService.login(form.value).subscribe(
+        response => {
+          console.log('Login successful', response);
+          this.router.navigate(['./myprofile']); // Redirect to myprofile page
+        },
+        error => {
+          console.error('Error during login', error);
         }
-      },
-      (error) => {
-        alert("Incorrect Email or Password");
-        this.errorMessage = "Incorrect Email or Password";
-      });
+      );
+    }
   }
 }
-

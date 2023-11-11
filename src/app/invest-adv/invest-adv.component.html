@@ -1,0 +1,214 @@
+<style>
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* Full-width input fields */
+input[type=text],
+input[type=password] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+}
+
+/* Add a background color when the inputs get focus */
+input[type=text]:focus,
+input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+/* Set a style for all buttons */
+button {
+    background-color: #A49665;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+}
+
+button:hover {
+    opacity: 1;
+}
+
+/* Extra styles for the cancel button */
+.cancelbtn {
+    padding: 14px 20px;
+    background-color: #005035;
+}
+
+/* Float cancel and signup buttons and add an equal width */
+.cancelbtn,
+.signupbtn {
+    float: left;
+    width: 50%;
+}
+
+/* Add padding to container elements */
+.container {
+    padding: 16px;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: #101820;
+    padding-top: 50px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto 15% auto;
+    /* 5% from the top, 15% from the bottom and centered */
+    border: 1px solid #888;
+    width: 80%;
+    /* Could be more or less, depending on screen size */
+}
+
+/* Style the horizontal ruler */
+hr {
+    border: 1px solid #A49665;
+    margin-bottom: 25px;
+}
+
+/* The Close Button (x) */
+.close {
+    position: absolute;
+    right: 35px;
+    top: 15px;
+    font-size: 40px;
+    font-weight: bold;
+    color: #FFFFFF;
+}
+
+.close:hover,
+.close:focus {
+    color: #007377;
+    cursor: pointer;
+}
+
+/* Clear floats */
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+/* Change styles for cancel button and signup button on extra small screens */
+@media screen and (max-width: 300px) {
+
+    .cancelbtn,
+    .signupbtn {
+        width: 100%;
+    }
+}
+</style>
+
+<div class="jumbotron">
+<h1 class="display-4">Investment Advice</h1>
+<p class="lead">Welcome to the 49er Investment Corner — your compass in the world of finance! Tailored for the UNC Charlotte community, we're here to guide you through the maze of investment options. Our advice page is a treasure trove of insights,
+    from foundational investment strategies to advanced portfolio management. Whether you're taking your first steps towards financial independence or looking to diversify your assets, we provide the know-how to help you make informed decisions that resonate with your personal goals.
+    Start turning your academic achievements into financial success and let your money grow with you, every step of the way. Join us, and let's build your future on a solid foundation of smart, strategic investments.</p>
+<hr class="my-4">
+<p>Empowering 49ers to Invest Wisely — Secure Your Financial Future Today!</p>
+<p class="lead">
+    <a href="https://www.investopedia.com/articles/younginvestors/12/best-investments-for-young-people.asp" target="_blank" class="btn btn-primary">Take a Look</a>
+    <a href="https://www.nytimes.com/2020/02/10/smarter-living/the-young-persons-guide-to-investing.html" target="_blank" class="btn btn-secondary" style="margin-left: 20px;">Read about Investments Overlook</a>
+</p>
+</div>
+
+<section id="about">
+  <div class="container" data-aos="fade-up">
+    <div class="row about-container">
+
+      <div class="col-lg-6 content order-lg-1 order-2">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        </p>
+
+        <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
+          <div class="icon"><i class="bi bi-card-checklist"></i></div>
+          <h4 class="title"><a href="">Eiusmod Tempor</a></h4>
+          <p class="description">Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi</p>
+        </div>
+
+        <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
+          <div class="icon"><i class="bi bi-brightness-high"></i></div>
+          <h4 class="title"><a href="">Magni Dolores</a></h4>
+          <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+        </div>
+
+        <div class="icon-box" data-aos="fade-up" data-aos-delay="300">
+          <div class="icon"><i class="bi bi-calendar4-week"></i></div>
+          <h4 class="title"><a href="">Dolor Sitema</a></h4>
+          <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
+        </div>
+
+      </div>
+
+      <div class="col-lg-6 background order-lg-2" data-aos="zoom-in">
+        <img src="../../assets/about-extra-1.svg" class="img-fluid" alt="">
+      </div>
+    </div>
+    <br>
+    <div class="row about-extra">
+      <div class="col-lg-6" data-aos="fade-right">
+        <img src="../../assets/about-extra-2.svg" class="img-fluid" alt="">
+      </div>
+      <div class="col-lg-6 pt-5 pt-lg-0" data-aos="fade-left">
+        <h4>Voluptatem dignissimos provident quasi corporis voluptates sit assumenda.</h4>
+        <p>
+          Ipsum in aspernatur ut possimus sint. Quia omnis est occaecati possimus ea. Quas molestiae perspiciatis occaecati qui rerum. Deleniti quod porro sed quisquam saepe. Numquam mollitia recusandae non ad at et a.
+        </p>
+        <p>
+          Ad vitae recusandae odit possimus. Quaerat cum ipsum corrupti. Odit qui asperiores ea corporis deserunt veritatis quidem expedita perferendis. Qui rerum eligendi ex doloribus quia sit. Porro rerum eum eum.
+        </p>
+      </div>
+    </div>
+    <br>
+    <div class="row about-extra">
+      <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-left">
+        <img src="../../assets/about-img.svg" class="img-fluid" alt="">
+      </div>
+
+      <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1" data-aos="fade-right">
+        <h4>Neque saepe temporibus repellat ea ipsum et. Id vel et quia tempora facere reprehenderit.</h4>
+        <p>
+          Delectus alias ut incidunt delectus nam placeat in consequatur. Sed cupiditate quia ea quis. Voluptas nemo qui aut distinctio. Cumque fugit earum est quam officiis numquam. Ducimus corporis autem at blanditiis beatae incidunt sunt.
+        </p>
+        <p>
+          Voluptas saepe natus quidem blanditiis. Non sunt impedit voluptas mollitia beatae. Qui esse molestias. Laudantium libero nisi vitae debitis. Dolorem cupiditate est perferendis iusto.
+        </p>
+        <p>
+          Eum quia in. Magni quas ipsum a. Quis ex voluptatem inventore sint quia modi. Numquam est aut fuga mollitia exercitationem nam accusantium provident quia.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+

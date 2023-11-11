@@ -1,30 +1,16 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:9992/student';
-  private userId: string | null = null;
+
+  private loginUrl = 'http://localhost:3000/api/login'; // Update with your server URL
 
   constructor(private http: HttpClient) {}
 
-  login(email: string, password: string): Observable<any> {
-    const loginData = {
-      email: email,
-      password: password,
-    };
-    return this.http.post<any>(`${this.apiUrl}/login`, loginData);
-  }
-
-  setLoggedInUserId(_id: string) {
-    console.log('Setting user ID:', _id);
-    this.userId = _id;
-  }
-
-  getLoggedInUserId(): string | null {
-    return this.userId;
+  login(userData: any) {
+    return this.http.post(this.loginUrl, userData);
   }
 }
