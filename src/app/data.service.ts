@@ -20,9 +20,9 @@ export class DataService {
   constructor(private http: HttpClient) {}
 
   getUserData(_id: string): Observable<Data> {
-    const headers = {
-      'Authorization': `Bearer ${localStorage.getItem('token')}`
-    };
+    const token = sessionStorage.getItem('token');
+    const headers = { 'Authorization': `Bearer ${token}` };
     return this.http.get<Data>(`${this.apiUrl}/user/${_id}`, { headers });
   }
+
 }

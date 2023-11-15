@@ -7,7 +7,6 @@ import { Observable } from 'rxjs';
 })
 export class AuthService {
   private apiUrl = 'http://localhost:3000/api';
-  private userId: string | null = null;
 
   constructor(private http: HttpClient) {}
 
@@ -20,12 +19,21 @@ export class AuthService {
   }
 
   setLoggedInUserId(_id: string, token: string) {
-    console.log('Setting user ID:', _id);
-    this.userId = _id;
-    localStorage.setItem('token', token); // Store the token
+    sessionStorage.setItem('userId', _id); // Store the user ID in session storage
+    sessionStorage.setItem('token', token); // Store the token in session storage
   }
 
   getLoggedInUserId(): string | null {
-    return this.userId;
+    return sessionStorage.getItem('userId');
+  }
+
+  getToken(): string | null {
+    return sessionStorage.getItem('token');
+  }
+
+  logout() {
+    sessionStorage.removeItem('userId');
+    sessionStorage.removeItem('token');
+    // Additional cleanup actions can be added here if needed
   }
 }

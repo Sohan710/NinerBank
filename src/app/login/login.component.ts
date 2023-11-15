@@ -12,28 +12,25 @@ export class LoginComponent {
 
   email: string = '';
   password: string = '';
-
-  errorMessage: string = ""; // Fixed the typo
+  errorMessage: string = '';
 
   constructor(private authService: AuthService, private router: Router, private http: HttpClient) { }
 
   login() {
-    console.log(this.email);
-    console.log(this.password);
-
     this.authService.login(this.email, this.password).subscribe(
       (response: any) => {
-        if (response.success) {
-          this.authService.setLoggedInUserId(response.userId, response.token);
+        if (response && response.token) {
+          // Assuming the response contains a token and a userId
+          sessionStorage.setItem('token', response.token);
+          sessionStorage.setItem('userId', response.userId); // Or whatever user identifier your API returns
           this.router.navigateByUrl('/myprofile');
         } else {
-          alert("Login Failed"); // Changed the message to 'Login Failed'
+          this.errorMessage = "Login Failed. Please check your credentials.";
         }
       },
       (error) => {
-        alert("Incorrect Email or Password");
-        this.errorMessage = "Incorrect Email or Password";
-      });
+        this.errorMessage = "An error occurred during login. Please try again.";
+      }
+    );
   }
 }
-
