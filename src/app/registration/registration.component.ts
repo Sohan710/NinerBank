@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { RegistrationService } from '../registration.service'; // Ensure this path is correct
+import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-registration',
@@ -8,26 +8,41 @@ import { RegistrationService } from '../registration.service'; // Ensure this pa
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent {
-  registrationForm: FormGroup;
+  firstName: string = "";
+  lastName: string = "";
+  email: string = "";
+  studentId: string = "";
+  password: string = "";
 
-  constructor(private fb: FormBuilder, private registrationService: RegistrationService) {
-    this.registrationForm = this.fb.group({
-      firstName: [''], // Added default values as empty strings
-      lastName: [''],
-      email: [''],
-      studentId: [''], // Make sure the type matches with your backend (number or string)
-      password: ['']
-    });
+  constructor(private http: HttpClient, private router: Router) {
+  }
+
+  ngOnInit(): void {
   }
 
   register() {
-    this.registrationService.register(this.registrationForm.value).subscribe(
-      response => {
-        console.log('Registration successful', response);
+    let bodyData = {
+      "firstName": this.firstName,
+      "lastName": this.lastName,
+      "email": this.email,
+      "studentId": this.studentId,
+      "password": this.password,
+    };
+    this.http.post("http://localhost:3000/api/register", bodyData).subscribe((resultData: any) => {
+        console.log(resultData);
+        alert("Student Registered Successfully");
+        this.router.navigate(['/login']); // Redirect to login page
       },
-      error => {
-        console.error('Error during registration', error);
+      (error) => {
+        console.error('Registration error:', error);
+        // Handle registration error
+        alert("Registration Failed: " + error.message);
       }
     );
   }
+
+  save() {
+    this.register();
+  }
 }
+

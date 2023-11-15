@@ -10,6 +10,7 @@ export class RegistrationService {
   constructor(private http: HttpClient) {}
 
   register(userData: any) {
+    console.log('Sending registration data:', userData); // Log data being sent for registration
     return this.http.post(this.apiUrl, userData);
   }
 }

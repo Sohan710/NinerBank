@@ -1,1 +1,85 @@
-<p>myprofile works!</p>
+<section style="background-color: #eee;">
+  <div class="container py-5">
+    <div class="row">
+      <div class="col">
+        <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+          <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item"><a href="#">Niner's Bank</a></li>
+            <li class="breadcrumb-item"><a href="#">User Profile</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ userData?.firstName }} {{ userData?.lastName }}</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="card mb-4">
+          <div class="card-body text-center">
+            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+              class="rounded-circle img-fluid" style="width: 150px;">
+            <h5 class="my-3">{{ userData?.firstName }} {{ userData?.lastName }}</h5>
+            <p class="text-muted mb-1">Student</p>
+            <p class="text-muted mb-4">Charlotte, North Carolina, USA</p>
+            <div class="d-flex justify-content-center mb-2">
+              <button type="submit" class="btn btn-primary btn-lg"
+              style="background-color: #A49665; border-color: #A49665; margin: 10px">My Portfolio</button>
+              <button type="submit" class="btn btn-primary btn-lg"
+              style="background-color: #005035; border-color: #005035; margin: 10px">Log Out</button>
+            </div>
+          </div>
+        </div>
+        <div class="card mb-4 mb-lg-0">
+          <div class="card-body p-0">
+            <ul class="list-group list-group-flush rounded-3">
+              <!-- ... Additional content ... -->
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8">
+          <div class="card mb-4">
+            <div class="card-body">
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">First Name:</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{ userData?.firstName }}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Last Name:</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{ userData?.lastName }}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Email ID:</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{ userData?.email }}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Student ID:</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{ userData?.studentId }}</p>
+                </div>
+              </div>
+              <hr>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
