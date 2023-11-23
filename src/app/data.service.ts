@@ -54,4 +54,8 @@ export class DataService {
       })
     );
   }
+
+  deleteExpense(userId: string, expenseId: string): Promise<void> {
+    return this.firestore.collection(`users/${userId}/expenses`).doc(expenseId).delete();
+  }
 }

@@ -21,6 +21,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { PortfolioComponent } from './portfolio/portfolio.component';
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { PortfolioComponent } from './portfolio/portfolio.component';
     CommonModule,
     AppRoutingModule,
     FormsModule,
+    NgChartsModule,
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,

@@ -1,35 +1,38 @@
-<div class="portfolio-container">
-  <h2>Your Expenses</h2>
-
-  <div *ngIf="isLoading">
-    <!-- You can replace this with a spinner or a loading animation -->
-    <p>Loading expenses...</p>
+<div *ngIf="!isLoading">
+  <div class="chart-container">
+    <canvas baseChart
+      [data]="pieChartData"
+      [options]="pieChartOptions"
+      [type]="pieChartType">
+    </canvas>
   </div>
-
-  <div *ngIf="!isLoading">
-    <div *ngIf="userExpenses && userExpenses.length > 0; else noExpenses">
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">Amount</th>
-            <th scope="col">Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let expense of userExpenses; let i = index">
-            <th scope="row">{{ i + 1 }}</th>
-            <td>{{ expense.name }}</td>
-            <td>{{ expense.amount | currency }}</td>
-            <td>{{ expense.date | date: 'medium' }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <ng-template #noExpenses>
-      <p>You have not recorded any expenses yet.</p>
-    </ng-template>
+  <div class="chart-container">
+    <canvas baseChart
+      [data]="lineChartData"
+      [options]="lineChartOptions"
+      [type]="lineChartType">
+    </canvas>
   </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Date</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let expense of userExpenses; let i = index">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ expense.name }}</td>
+        <td>{{ expense.amount | currency }}</td>
+        <td>{{ expense.date | date: 'medium' }}</td>
+        <td>
+          <button class="btn btn-danger" (click)="onDeleteExpense(expense.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
