@@ -6,6 +6,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import { MyportfolioComponent } from './myportfolio/myportfolio.component';
 import { InvestAdvComponent } from './invest-adv/invest-adv.component';
 import { MyprofileComponent } from './myprofile/myprofile.component';
+import { PortfolioComponent } from './portfolio/portfolio.component'; // Adjust the path as needed
 
 const routes: Routes =
 [
@@ -15,7 +16,8 @@ const routes: Routes =
     {path: 'registration',component:RegistrationComponent},
     {path: 'myportfolio',component:MyportfolioComponent},
     {path: 'myprofile',component:MyprofileComponent},
-    {path: 'investadv',component:InvestAdvComponent}
+    {path: 'investadv',component:InvestAdvComponent},
+    { path: 'portfolio', component: PortfolioComponent },
 ];
 
 @NgModule({

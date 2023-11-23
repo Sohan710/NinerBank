@@ -1,71 +1,355 @@
+<style>
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+  }
 
+  * {
+    box-sizing: border-box;
+  }
 
-  <!-- <div class="row">
-  <div class="col-md-6">
-              <div class="card mb-4 mb-md-0">
-                <div class="card-body">
-                  <p class="mb-4"><span class="text-primary font-italic me-1">assigment</span> Project Status
-                  </p>
-                  <p class="mb-1" style="font-size: .77rem;">Web Design</p>
-                  <div class="progress rounded" style="height: 5px;">
-                    <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                  <p class="mt-4 mb-1" style="font-size: .77rem;">Website Markup</p>
-                  <div class="progress rounded" style="height: 5px;">
-                    <div class="progress-bar" role="progressbar" style="width: 72%" aria-valuenow="72"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                  <p class="mt-4 mb-1" style="font-size: .77rem;">One Page</p>
-                  <div class="progress rounded" style="height: 5px;">
-                    <div class="progress-bar" role="progressbar" style="width: 89%" aria-valuenow="89"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                  <p class="mt-4 mb-1" style="font-size: .77rem;">Mobile Template</p>
-                  <div class="progress rounded" style="height: 5px;">
-                    <div class="progress-bar" role="progressbar" style="width: 55%" aria-valuenow="55"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                  <p class="mt-4 mb-1" style="font-size: .77rem;">Backend API</p>
-                  <div class="progress rounded mb-2" style="height: 5px;">
-                    <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                </div>
-              </div>
-            </div> -->
-            <!-- <div class="col-md-6">
-              <div class="card mb-4 mb-md-0">
-                <div class="card-body">
-                  <p class="mb-4"><span class="text-primary font-italic me-1">assigment</span> Project Status
-                  </p>
-                  <p class="mb-1" style="font-size: .77rem;">Web Design</p>
-                  <div class="progress rounded" style="height: 5px;">
-                    <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                  <p class="mt-4 mb-1" style="font-size: .77rem;">Website Markup</p>
-                  <div class="progress rounded" style="height: 5px;">
-                    <div class="progress-bar" role="progressbar" style="width: 72%" aria-valuenow="72"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                  <p class="mt-4 mb-1" style="font-size: .77rem;">One Page</p>
-                  <div class="progress rounded" style="height: 5px;">
-                    <div class="progress-bar" role="progressbar" style="width: 89%" aria-valuenow="89"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                  <p class="mt-4 mb-1" style="font-size: .77rem;">Mobile Template</p>
-                  <div class="progress rounded" style="height: 5px;">
-                    <div class="progress-bar" role="progressbar" style="width: 55%" aria-valuenow="55"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                  <p class="mt-4 mb-1" style="font-size: .77rem;">Backend API</p>
-                  <div class="progress rounded mb-2" style="height: 5px;">
-                    <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-                    
-  </div> -->
+  /* Full-width input fields */
+  input[type="text"],
+  input[type="password"] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+  }
+
+  /* Add a background color when the inputs get focus */
+  input[type="text"]:focus,
+  input[type="password"]:focus {
+    background-color: #ddd;
+    outline: none;
+  }
+
+  /* Set a style for all buttons */
+  button {
+    background-color: #a49665;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+  }
+
+  button:hover {
+    opacity: 1;
+    background-color: #005035;
+  }
+
+  /* Extra styles for the cancel button */
+  .cancelbtn {
+    padding: 14px 20px;
+    background-color: #005035;
+  }
+
+  /* Float cancel and signup buttons and add an equal width */
+  .cancelbtn,
+  .signupbtn {
+    float: left;
+    width: 50%;
+  }
+
+  /* Add padding to container elements */
+  .container {
+    padding: 16px;
+  }
+
+  /* The Modal (background) */
+  .modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: #101820;
+    padding-top: 50px;
+  }
+
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 5% auto 15% auto;
+    /* 5% from the top, 15% from the bottom and centered */
+    border: 1px solid #888;
+    width: 80%;
+    /* Could be more or less, depending on screen size */
+  }
+
+  /* Style the horizontal ruler */
+  hr {
+    border: 1px solid #a49665;
+    margin-bottom: 25px;
+  }
+
+  /* The Close Button (x) */
+  .close {
+    position: absolute;
+    right: 35px;
+    top: 15px;
+    font-size: 40px;
+    font-weight: bold;
+    color: #ffffff;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: #005035;
+    cursor: pointer;
+  }
+
+  /* Clear floats */
+  .clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+  /* Change styles for cancel button and signup button on extra small screens */
+  @media screen and (max-width: 300px) {
+    .cancelbtn,
+    .signupbtn {
+      width: 100%;
+    }
+  }
+</style>
+
+<div class="jumbotron">
+  <h1 class="display-4" style="font-weight: 600">My Portfolio</h1>
+  <p class="lead">
+    Welcome to 49er Investment Corner, the dedicated financial hub for the UNC
+    Charlotte community. Our mission is to navigate you through the complex
+    landscape of investment opportunities. We specialize in demystifying the
+    world of finance, offering a range of insights from basic investment
+    principles to sophisticated portfolio management techniques. Our platform is
+    ideal for those embarking on their financial journey or seasoned investors
+    seeking to expand their portfolios. We empower you with the knowledge to
+    make strategic decisions aligning with your personal ambitions. Embark on a
+    journey of transforming your academic success into financial prosperity. Let
+    your investments flourish alongside your personal and professional growth.
+    Join the 49er Investment Corner, and lay the groundwork for a financially
+    secure and successful future.
+  </p>
+  <hr class="my-4" />
+  <p>Explore the World of Smart Investing with 49er Investment Corner!</p>
+  <p class="lead">
+    <button
+      onclick="document.getElementById('expenseFormModal').style.display='block'"
+      style="width: auto"
+      class="btn btn-success"
+    >
+      Enter Expense Details
+    </button>
+    <button (click)="goToPortfolioPage()" style="width: auto; margin-left: 20px" class="btn btn-success">
+      Expense Portfolio
+    </button>
+  </p>
+
+  <div id="expenseFormModal" class="modal">
+    <span
+      onclick="document.getElementById('expenseFormModal').style.display='none'"
+      class="close"
+      title="Close Modal"
+      >&times;</span
+    >
+    <form class="modal-content">
+      <h1 style="margin-left: 20px; margin-top: 20px; font-weight: 700">
+        Expense Entry Form
+      </h1>
+      <p style="margin-left: 20px; font-weight: 500">
+        Please fill in this form to record your expense.
+      </p>
+      <!-- Name -->
+      <div
+        class="form-outline mb-4"
+        style="margin-left: 20px; margin-right: 20px; font-weight: 500"
+      >
+        <label class="form-label" for="expenseName">Expense Name:</label>
+        <input
+          type="text"
+          id="expenseName"
+          class="form-control form-control-lg"
+          placeholder="Enter the name of the expense"
+        />
+      </div>
+      <!-- Amount -->
+      <div
+        class="form-outline mb-4"
+        style="margin-left: 20px; margin-right: 20px; font-weight: 500"
+      >
+        <label class="form-label" for="expenseAmount">Amount:</label>
+        <input
+          type="number"
+          id="expenseAmount"
+          class="form-control form-control-lg"
+          placeholder="Enter the amount spent"
+        />
+      </div>
+      <!-- Time -->
+      <div
+        class="form-outline mb-4"
+        style="margin-left: 20px; margin-right: 20px; font-weight: 500"
+      >
+        <label class="form-label" for="expenseDate">Date/Time:</label>
+        <input
+          type="datetime-local"
+          id="expenseDate"
+          class="form-control form-control-lg"
+          placeholder="Enter the date and time of the expense"
+        />
+      </div>
+
+      <label>
+        <input
+          type="checkbox"
+          checked="checked"
+          style="margin-left: 20px; font-weight: 500"
+        />
+        Agree to terms and condition.
+      </label>
+      <p style="margin-left: 20px; font-weight: 500">
+        By submitting this form you acknowledge the accuracy of the provided
+        information.
+      </p>
+      <div
+        class="text-center text-lg-start mt-4 pt-2"
+        style="margin-left: 20px; font-weight: 500; margin-right: 20px"
+      >
+        <button
+          type="submit"
+          class="btn btn-success btn-lg"
+          style="padding-left: 2.5rem; padding-right: 2.5rem"
+        >
+          Submit
+        </button>
+        <button
+          type="button"
+          class="btn btn-success btn-lg"
+          onclick="document.getElementById('expenseFormModal').style.display='none'"
+        >
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+<section id="about">
+  <div class="container" data-aos="fade-up">
+    <div class="row about-container">
+      <div class="col-lg-6 content order-lg-1 order-2">
+        <hr />
+        <h2 style="color: #005035; font-weight: 600">
+          The Importance of a Well-Crafted Portfolio for Students
+        </h2>
+        <p>
+          For students at UNC Charlotte, building a robust investment portfolio
+          is more than just a financial decision; it's a step towards mastering
+          personal finance and preparing for a prosperous future. Learning to
+          create and manage a portfolio, even with limited resources, is an
+          invaluable skill in today's economic landscape.
+        </p>
+
+        <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
+          <div class="icon">
+            <i class="fa-solid fa-building-columns custom-icon"></i>
+          </div>
+          <h4 class="title">
+            <a
+              href="your-link-for-portfolio-building"
+              style="color: #005035; font-weight: 600"
+              >Constructing Your First Portfolio</a
+            >
+          </h4>
+          <p class="description">
+            As a student, starting to build a portfolio early on has significant
+            benefits. It's not about the size of the investment but about
+            understanding the process of asset allocation, risk assessment, and
+            long-term financial planning. Starting with small investments, such
+            as in mutual funds or stocks, can teach you valuable lessons about
+            market trends and investment strategies.
+          </p>
+        </div>
+
+        <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
+          <div class="icon">
+            <i class="fa-solid fa-chart-line custom-icon"></i>
+          </div>
+          <h4 class="title">
+            <a
+              href="your-link-for-portfolio-importance"
+              style="color: #005035; font-weight: 600"
+              >The Power of a Diverse Portfolio</a
+            >
+          </h4>
+          <p class="description">
+            A well-maintained portfolio is essential for university students as
+            it promotes financial literacy and prepares them for future
+            financial responsibilities. It helps in understanding market
+            dynamics, risk management, and the value of long-term planning.
+            Diversification within a portfolio minimizes risks and maximizes
+            potential returns, teaching students the importance of balanced
+            investing.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-lg-6 background order-lg-2" data-aos="zoom-in">
+        <img
+          src="../../assets/portfolio1.svg"
+          class="img-fluid"
+          alt="Investment Image"
+        />
+      </div>
+    </div>
+    <br />
+    <hr />
+    <br />
+    <div class="row about-extra">
+      <div class="col-lg-6" data-aos="fade-right">
+        <img
+          src="../../assets/portfolio2.svg"
+          class="img-fluid"
+          alt="Financial Planning Image"
+        />
+      </div>
+      <div class="col-lg-6 pt-5 pt-lg-0" data-aos="fade-left">
+        <h2 style="color: #005035; font-weight: 600">
+          Budgeting and Saving: The First Steps
+        </h2>
+        <p>
+          Effective investment starts with good budgeting. Learn to manage your
+          finances by setting aside a portion of your income or allowance for
+          investments. Regular saving habits can free up capital to grow through
+          investments.
+        </p>
+        <p>
+          Utilize student discounts and be mindful of unnecessary expenses. The
+          money you save can be your first step towards investing.
+        </p>
+        <p>
+          Building a portfolio early in life instills financial discipline,
+          aiding in the development of skills necessary for successful personal
+          financial management. It empowers students to take charge of their
+          financial future, setting a course towards financial freedom and
+          security.
+        </p>
+      </div>
+    </div>
+    <br />
+    <hr />
+  </div>
+</section>

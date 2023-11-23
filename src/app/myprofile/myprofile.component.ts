@@ -1,7 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService, Data } from '../data.service';
+import { DataService } from '../data.service';
 import { AuthService } from '../auth.service';
-import { Router } from '@angular/router'; // Corrected import
+import { Router } from '@angular/router';
+
+interface UserData {
+  // Define the structure of your user data here
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  studentId?: string;
+}
 
 @Component({
   selector: 'app-myprofile',
@@ -9,41 +17,54 @@ import { Router } from '@angular/router'; // Corrected import
   styleUrls: ['./myprofile.component.css']
 })
 export class MyprofileComponent implements OnInit {
-  userData: Data | null = null;
+  userData: UserData | null = null;
 
   constructor(
     private dataService: DataService,
     private authService: AuthService,
-    private router: Router // Injected the Router
+    private router: Router
   ) {}
 
   ngOnInit() {
     const userId = this.authService.getLoggedInUserId();
     if (userId) {
       this.fetchUserData(userId);
+    } else {
+      // Redirect to login if no user ID is found
+      this.router.navigate(['/login']);
     }
   }
 
   fetchUserData(userId: string) {
     this.dataService.getUserData(userId).subscribe(
-      (data) => {
-        console.log('Received data:', data);
+      (data: UserData) => {
         this.userData = data;
       },
-      (error) => {
+      (error: any) => {
         console.error('Error fetching user data:', error);
-        // Handle error accordingly
+        // Handle the error
       }
     );
   }
 
+  updateUserData(updatedData: UserData) {
+    const userId = this.authService.getLoggedInUserId();
+    if (userId) {
+      this.dataService.updateUser(userId, updatedData).then(() => {
+        // Handle successful update
+      }).catch((error: any) => {
+        console.error('Error updating user data:', error);
+        // Handle the error
+      });
+    }
+  }
+
   logout() {
     this.authService.logout();
-    this.router.navigate(['/login']); // Redirect to login after logout
+    this.router.navigate(['/login']);
   }
 
   goToPortfolio() {
-    this.router.navigate(['/myportfolio']); // Use the correct path for your portfolio page
+    this.router.navigate(['/myportfolio']);
   }
 }
-

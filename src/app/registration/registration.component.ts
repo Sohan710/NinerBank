@@ -1,12 +1,15 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { FirebaseError } from 'firebase/app';
 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.css']
 })
+
 export class RegistrationComponent {
   firstName: string = "";
   lastName: string = "";
@@ -14,35 +17,41 @@ export class RegistrationComponent {
   studentId: string = "";
   password: string = "";
 
-  constructor(private http: HttpClient, private router: Router) {
-  }
+  constructor(
+    private afAuth: AngularFireAuth,
+    private firestore: AngularFirestore,
+    private router: Router
+  ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-  register() {
-    let bodyData = {
-      "firstName": this.firstName,
-      "lastName": this.lastName,
-      "email": this.email,
-      "studentId": this.studentId,
-      "password": this.password,
-    };
-    this.http.post("http://localhost:3000/api/register", bodyData).subscribe((resultData: any) => {
-        console.log(resultData);
+  async register() {
+    try {
+      const userCredential = await this.afAuth.createUserWithEmailAndPassword(this.email, this.password);
+      const user = userCredential.user;
+      if (user) {
+        await this.firestore.collection('users').doc(user.uid).set({
+          firstName: this.firstName,
+          lastName: this.lastName,
+          email: this.email,
+          studentId: this.studentId,
+          // Add other user-specific fields as needed
+        });
         alert("Student Registered Successfully");
-        this.router.navigate(['/login']); // Redirect to login page
-      },
-      (error) => {
-        console.error('Registration error:', error);
-        // Handle registration error
-        alert("Registration Failed: " + error.message);
+        this.router.navigate(['/login']);
+      } else {
+        throw new Error('User creation failed');
       }
-    );
-  }
-
-  save() {
-    this.register();
+    } catch (error) {
+      if (error instanceof FirebaseError) {
+        // Now 'error' is typed as FirebaseError
+        console.error('Registration error:', error.message);
+        alert("Registration Failed: " + error.message);
+      } else {
+        // Handle other types of errors
+        console.error('An unexpected error occurred:', error);
+        alert("An unexpected error occurred. Please try again.");
+      }
+    }
   }
 }
-

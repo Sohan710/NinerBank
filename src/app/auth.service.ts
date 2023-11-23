@@ -1,21 +1,33 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:3000/api';
 
-  constructor(private http: HttpClient) {}
+  constructor(private afAuth: AngularFireAuth) {}
 
   login(email: string, password: string): Observable<any> {
-    const loginData = {
-      email: email,
-      password: password,
-    };
-    return this.http.post<any>(`${this.apiUrl}/login`, loginData);
+    return new Observable(observer => {
+      this.afAuth.signInWithEmailAndPassword(email, password).then(
+        userCredential => {
+          if (userCredential.user) {
+            // User is not null, proceed with login
+            observer.next({ token: userCredential.user.refreshToken, userId: userCredential.user.uid });
+            observer.complete();
+          } else {
+            // User is null, handle accordingly
+            observer.error(new Error('User not found'));
+          }
+        },
+        error => {
+          // Failed login
+          observer.error(error);
+        }
+      );
+    });
   }
 
   setLoggedInUserId(_id: string, token: string) {
