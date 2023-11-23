@@ -8,13 +8,10 @@ import { AuthService } from '../auth.service'; // Adjust the import path as need
   styleUrls: ['./portfolio.component.css']
 })
 export class PortfolioComponent implements OnInit {
-  userExpenses: any[] = []; // Define the type if known, else use 'any'
-  isLoading: boolean = true; // Declare the isLoading property
+  userExpenses: any[] = [];
+  isLoading: boolean = true;
 
-  constructor(
-    private dataService: DataService,
-    private authService: AuthService
-  ) {}
+  constructor(private dataService: DataService, private authService: AuthService) {}
 
   ngOnInit() {
     this.fetchUserExpenses();
@@ -24,19 +21,19 @@ export class PortfolioComponent implements OnInit {
     const userId = this.authService.getLoggedInUserId();
     if (userId) {
       this.dataService.getUserExpenses(userId).subscribe(
-        (expenses: any) => { // Define the type if known, else use 'any'
+        (expenses: any[]) => {
           this.userExpenses = expenses;
-          this.isLoading = false; // Set isLoading to false after fetching data
+          this.isLoading = false;
         },
-        (error: any) => { // Define the type if known, else use 'any'
+        (error: any) => {
           console.error('Error fetching expenses:', error);
-          this.isLoading = false; // Set isLoading to false if an error occurs
+          this.isLoading = false;
         }
       );
     } else {
       console.error('User is not logged in');
-      this.isLoading = false; // Set isLoading to false if user is not logged in
-      // Handle the user not being logged in
+      this.isLoading = false;
+      // Redirect to login or handle accordingly
     }
   }
 }

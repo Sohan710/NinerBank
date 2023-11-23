@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable, throwError } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, tap, map } from 'rxjs/operators';
 
 interface UserData {
   // Define the structure of your user data here
@@ -34,11 +34,20 @@ export class DataService {
     );
   }
 
-  // If getUserExpenses is supposed to be a method, define it here
-  getUserExpenses(userId: string): Observable<any> {
-    // Replace 'expenses' with the actual collection name if different
-    return this.firestore.collection('expenses', ref => ref.where('userId', '==', userId)).valueChanges().pipe(
-      tap((expenses: any) => console.log('Fetched expenses:', expenses)), // Define the type if known, else use 'any'
+  getUserExpenses(userId: string): Observable<any[]> {
+    return this.firestore.collection(`users/${userId}/expenses`).snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as any; // Cast to 'any' or create an interface for the expense data
+        const id = a.payload.doc.id;
+        // Check if 'data.date' is a Timestamp and has a 'toDate' method
+        if (data.date && typeof data.date.toDate === 'function') {
+          data.date = data.date.toDate(); // Convert Timestamp to Date object
+        } else if (data.date) {
+          // If 'data.date' is a string, create a new Date object
+          data.date = new Date(data.date);
+        }
+        return { id, ...data }; // Combine the id and data into one object
+      })),
       catchError((error: any) => {
         console.error('Error fetching expenses:', error);
         return throwError(() => new Error('Error fetching expenses'));
