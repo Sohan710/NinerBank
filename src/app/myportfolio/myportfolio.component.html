@@ -154,7 +154,11 @@
     >
       Enter Expense Details
     </button>
-    <button (click)="goToPortfolioPage()" style="width: auto; margin-left: 20px" class="btn btn-success">
+    <button
+      (click)="goToPortfolioPage()"
+      style="width: auto; margin-left: 20px"
+      class="btn btn-success"
+    >
       Expense Portfolio
     </button>
   </p>
@@ -166,7 +170,7 @@
       title="Close Modal"
       >&times;</span
     >
-    <form class="modal-content">
+    <form class="modal-content" (ngSubmit)="submitExpense()">
       <h1 style="margin-left: 20px; margin-top: 20px; font-weight: 700">
         Expense Entry Form
       </h1>
@@ -180,10 +184,13 @@
       >
         <label class="form-label" for="expenseName">Expense Name:</label>
         <input
+          [(ngModel)]="expenseName"
+          name="expenseName"
           type="text"
           id="expenseName"
           class="form-control form-control-lg"
           placeholder="Enter the name of the expense"
+          required
         />
       </div>
       <!-- Amount -->
@@ -193,10 +200,14 @@
       >
         <label class="form-label" for="expenseAmount">Amount:</label>
         <input
+          [(ngModel)]="expenseAmount"
+          name="expenseAmount"
           type="number"
           id="expenseAmount"
           class="form-control form-control-lg"
           placeholder="Enter the amount spent"
+          required
+          min="0.01"
         />
       </div>
       <!-- Time -->
@@ -206,10 +217,13 @@
       >
         <label class="form-label" for="expenseDate">Date/Time:</label>
         <input
+          [(ngModel)]="expenseDate"
+          name="expenseDate"
           type="datetime-local"
           id="expenseDate"
           class="form-control form-control-lg"
           placeholder="Enter the date and time of the expense"
+          required
         />
       </div>
 
@@ -218,6 +232,7 @@
           type="checkbox"
           checked="checked"
           style="margin-left: 20px; font-weight: 500"
+          required
         />
         Agree to terms and condition.
       </label>

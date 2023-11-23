@@ -1,18 +1,21 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable, throwError } from 'rxjs';
-import { catchError, tap, map } from 'rxjs/operators';
-import { AuthService } from './auth.service'; // Adjust the import path as needed
-import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { catchError, tap } from 'rxjs/operators';
+
+interface UserData {
+  // Define the structure of your user data here
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  studentId?: string;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
   constructor(
-    private http: HttpClient,
-    private afAuth: AngularFireAuth,
     private firestore: AngularFirestore
   ) {}
 

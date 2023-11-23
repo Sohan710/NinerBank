@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-myportfolio',
   templateUrl: './myportfolio.component.html',
-  styleUrls: ['./myportfolio.component.css']
+  styleUrls: ['./myportfolio.component.css'],
 })
 export class MyportfolioComponent {
   expenseName: string = '';
@@ -34,11 +34,13 @@ export class MyportfolioComponent {
         const expenseData = {
           name: this.expenseName,
           amount: this.expenseAmount,
-          date: new Date(this.expenseDate),
-          userId: user.uid  // Ensure the user's UID is attached to the expense data
+          date: new Date(this.expenseDate).toISOString(), // Store date as ISO string
         };
         console.log('Adding expense:', expenseData);
-        await this.firestore.collection('expenses').add(expenseData); // Use 'expenses' collection
+        // Create a new expense document in the user's expenses subcollection
+        await this.firestore
+          .collection(`users/${user.uid}/expenses`)
+          .add(expenseData);
         alert('Expense added successfully');
         this.clearForm();
       } else {
@@ -58,6 +60,6 @@ export class MyportfolioComponent {
   }
 
   goToPortfolioPage() {
-    this.router.navigate(['/portfolio']); // Navigate to /portfolio
+    this.router.navigate(['/portfolio']);
   }
 }
