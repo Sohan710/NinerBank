@@ -1,38 +1,241 @@
-<div *ngIf="!isLoading">
-  <div class="chart-container">
-    <canvas baseChart
-      [data]="pieChartData"
-      [options]="pieChartOptions"
-      [type]="pieChartType">
-    </canvas>
-  </div>
-  <div class="chart-container">
-    <canvas baseChart
-      [data]="lineChartData"
-      [options]="lineChartOptions"
-      [type]="lineChartType">
-    </canvas>
-  </div>
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Name</th>
-        <th scope="col">Amount</th>
-        <th scope="col">Date</th>
-        <th scope="col">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let expense of userExpenses; let i = index">
-        <th scope="row">{{ i + 1 }}</th>
-        <td>{{ expense.name }}</td>
-        <td>{{ expense.amount | currency }}</td>
-        <td>{{ expense.date | date: 'medium' }}</td>
-        <td>
-          <button class="btn btn-danger" (click)="onDeleteExpense(expense.id)">Delete</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+<style>
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  /* Full-width input fields */
+  input[type="text"],
+  input[type="password"] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+  }
+
+  /* Add a background color when the inputs get focus */
+  input[type="text"]:focus,
+  input[type="password"]:focus {
+    background-color: #ddd;
+    outline: none;
+  }
+
+  /* Set a style for all buttons */
+  button {
+    background-color: #a49665;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+  }
+
+  button:hover {
+    opacity: 1;
+    background-color: #005035;
+  }
+
+  /* Extra styles for the cancel button */
+  .cancelbtn {
+    padding: 14px 20px;
+    background-color: #005035;
+  }
+
+  /* Float cancel and signup buttons and add an equal width */
+  .cancelbtn,
+  .signupbtn {
+    float: left;
+    width: 50%;
+  }
+
+  /* Add padding to container elements */
+  .container {
+    padding: 16px;
+  }
+
+  /* The Modal (background) */
+  .modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: #101820;
+    padding-top: 50px;
+  }
+
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 5% auto 15% auto;
+    /* 5% from the top, 15% from the bottom and centered */
+    border: 1px solid #888;
+    width: 80%;
+    /* Could be more or less, depending on screen size */
+  }
+
+  /* Style the horizontal ruler */
+  hr {
+    border: 1px solid #a49665;
+    margin-bottom: 25px;
+  }
+
+  /* The Close Button (x) */
+  .close {
+    position: absolute;
+    right: 35px;
+    top: 15px;
+    font-size: 40px;
+    font-weight: bold;
+    color: #ffffff;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: #005035;
+    cursor: pointer;
+  }
+
+  /* Clear floats */
+  .clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+  /* Change styles for cancel button and signup button on extra small screens */
+  @media screen and (max-width: 300px) {
+    .cancelbtn,
+    .signupbtn {
+      width: 100%;
+    }
+  }
+</style>
+
+<div class="jumbotron">
+  <h1 class="display-4" style="font-weight: 600">
+    Expense Management Insights
+  </h1>
+  <p class="lead">
+    Welcome to the 49er Financial Dashboard — your personal guide in the realm
+    of smart spending and budgeting. Exclusively crafted for the UNC Charlotte
+    community, our platform is dedicated to helping you navigate through the
+    intricacies of managing expenses. Whether you're planning your monthly
+    budget, tracking daily expenses, or seeking insights into your spending
+    patterns, we provide the tools and knowledge to make informed financial
+    decisions. This isn't just about recording numbers; it's about understanding
+    your financial habits and learning how to optimize them. By visualizing your
+    expenses through our dynamic charts and graphs, you'll gain a clearer
+    perspective of your financial health. Let's embark on this journey towards
+    efficient expense management and financial mindfulness. Together, we'll
+    transform the way you perceive and handle your personal finances.
+  </p>
+  <hr class="my-4" />
+  <p>
+    Empowering 49ers with Financial Clarity and Control — Master Your Expenses
+    Today!
+  </p>
+  <p class="lead">
+    <button
+      (click)="goToMyProfilePage()"
+      style="width: auto; margin-left: 20px"
+      class="btn btn-success"
+    >
+      My Profile
+    </button>
+    <button
+      (click)="goToMyPortfolioPage()"
+      style="width: auto; margin-left: 20px"
+      class="btn btn-success"
+    >
+      Enter Expense Details
+    </button>
+  </p>
 </div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Amount</th>
+      <th scope="col">Date</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let expense of userExpenses; let i = index">
+      <th scope="row">{{ i + 1 }}</th>
+      <td>{{ expense.name }}</td>
+      <td>{{ expense.amount | currency }}</td>
+      <td>{{ expense.date | date : "medium" }}</td>
+      <td>
+        <button class="btn btn-success" (click)="onDeleteExpense(expense.id)">
+          Delete
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<hr />
+<div *ngIf="!isLoading" class="charts-container">
+  <!-- Row 1 -->
+  <div class="chart-row">
+    <!-- Pie Chart and Description -->
+    <div class="chart-box">
+      <h3 class="chart-title">Pie Chart: Expense Categories</h3>
+      <p class="chart-description">
+        The Pie Chart provides a clear visual representation of your expenses by category. It helps you quickly identify which areas you're spending the most in, such as groceries, utilities, entertainment, or travel. This chart is ideal for understanding the proportion of each category in your total expenditure.
+      </p>
+      <canvas baseChart [data]="pieChartData" [options]="pieChartOptions" [type]="pieChartType"></canvas>
+    </div>
+
+    <!-- Line Chart and Description -->
+    <div class="chart-box">
+      <h3 class="chart-title">Line Chart: Spending Over Time</h3>
+      <p class="chart-description">
+        The Line Chart allows you to track your spending habits over a period. By observing the trends, peaks, and troughs in this chart, you can gain insights into your spending patterns. This can be particularly useful for budgeting and identifying periods of high expenditure.
+      </p>
+      <canvas baseChart [data]="lineChartData" [options]="lineChartOptions" [type]="lineChartType"></canvas>
+    </div>
+  </div>
+
+  <!-- Row 2 -->
+  <div class="chart-row">
+    <!-- Bar Chart and Description -->
+    <div class="chart-box">
+      <h3 class="chart-title">Bar Chart: Monthly Comparison</h3>
+      <p class="chart-description">
+        The Bar Chart presents a comparison of your monthly expenses. It's an excellent tool for analyzing your spending across different months, helping you to spot any unusual patterns or changes in your financial behavior. This visual can aid in creating a more effective budget plan.
+      </p>
+      <canvas baseChart [data]="barChartData" [options]="barChartOptions" [type]="barChartType"></canvas>
+    </div>
+
+    <!-- Radar Chart and Description -->
+    <div class="chart-box">
+      <h3 class="chart-title">Radar Chart: Comprehensive View</h3>
+      <p class="chart-description">
+        The Radar Chart offers a comprehensive overview of your expense distribution. It's particularly useful for comparing multiple categories of expenses simultaneously. This chart can highlight the balance in your spending and show areas that might need more attention or budgeting.
+      </p>
+      <canvas baseChart [data]="radarChartData" [options]="radarChartOptions" [type]="radarChartType"></canvas>
+    </div>
+  </div>
+</div>
+<br>
+<br>

@@ -171,6 +171,9 @@
       >&times;</span
     >
     <form class="modal-content" (ngSubmit)="submitExpense()">
+      <c-alert *ngIf="showAlert" [color]="alertColor">
+        {{ alertMessage }}
+      </c-alert>
       <h1 style="margin-left: 20px; margin-top: 20px; font-weight: 700">
         Expense Entry Form
       </h1>

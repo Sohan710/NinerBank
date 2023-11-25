@@ -1,4 +1,10 @@
 <section>
+  <c-alert *ngIf="showAlert && alertColor === 'success'" color="success">
+    {{ alertMessage }} <a cAlertLink routerLink="/login">Going to Login Page</a>.
+  </c-alert>
+  <c-alert *ngIf="showAlert && alertColor === 'danger'" color="danger">
+    {{ alertMessage }}
+  </c-alert>
   <form #myform="ngForm" (ngSubmit)="register()">
     <div class="container-fluid h-custom">
       <div class="row d-flex justify-content-center align-items-center h-100">

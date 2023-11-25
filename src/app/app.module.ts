@@ -22,6 +22,14 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { PortfolioComponent } from './portfolio/portfolio.component';
 import { NgChartsModule } from 'ng2-charts';
+import { AlertModule } from '@coreui/angular';
+import { LottieModule } from 'ngx-lottie';
+import player from 'lottie-web';
+
+// Define a function that returns the player
+export function playerFactory() {
+  return player;
+}
 
 @NgModule({
   declarations: [
@@ -41,10 +49,12 @@ import { NgChartsModule } from 'ng2-charts';
     CommonModule,
     AppRoutingModule,
     FormsModule,
+    AlertModule,
     NgChartsModule,
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    LottieModule.forRoot({ player: playerFactory }),
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,

@@ -1,7 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
+import { DataService } from '../data.service';
+import { AuthService } from '../auth.service';
+
+interface UserData {
+  // Define the structure of your user data here
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  studentId?: string;
+}
 
 @Component({
   selector: 'app-myportfolio',
@@ -12,12 +22,39 @@ export class MyportfolioComponent {
   expenseName: string = '';
   expenseAmount: number = 0;
   expenseDate: string = '';
+  userData: UserData | null = null;
+  showAlert = false;
+  alertMessage: string = '';
+  alertColor: string = '';
 
   constructor(
     private afAuth: AngularFireAuth,
     private firestore: AngularFirestore,
-    private router: Router
+    private router: Router,
+    private dataService: DataService,
+    private authService: AuthService,
   ) {}
+
+  // New method to set an alert
+  setAlert(message: string, color: string = 'success') {
+    this.alertMessage = message;
+    this.alertColor = color;
+    this.showAlert = true;
+  }
+
+   // Modify this method to show success alert
+   updateUserData(updatedData: UserData) {
+    const userId = this.authService.getLoggedInUserId();
+    if (userId) {
+      this.dataService.updateUser(userId, updatedData).then(() => {
+        this.setAlert('Expense added successfully');
+        // Other actions after successful update
+      }).catch((error: any) => {
+        this.setAlert('Error updating user data', 'danger');
+        console.error('Error updating user data:', error);
+      });
+    }
+  }
 
   async submitExpense() {
     console.log('Attempting to submit expense');

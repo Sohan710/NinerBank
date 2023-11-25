@@ -10,6 +10,12 @@
       <div class="col-md-9 col-lg-6 col-xl-5">
         <img src="../../assets/login.svg" class="img-fluid" alt="Sample image" width="800" height="800" style="margin-top: 150px;">
       </div>
+      <c-alert *ngIf="loginSuccess" color="success">
+        Login successful. <a cAlertLink routerLink="/dashboard">Going to Dashboard</a>.
+      </c-alert>
+      <c-alert *ngIf="errorMessage" color="danger">
+        {{ errorMessage }}
+      </c-alert>
       <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
         <!-- Update the form submission to use 'login()' method -->
         <form (ngSubmit)="login()">
