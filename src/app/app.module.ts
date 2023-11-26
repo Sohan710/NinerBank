@@ -25,7 +25,6 @@ import { NgChartsModule } from 'ng2-charts';
 import { AlertModule } from '@coreui/angular';
 import { LottieModule } from 'ngx-lottie';
 import player from 'lottie-web';
-
 // Define a function that returns the player
 export function playerFactory() {
   return player;

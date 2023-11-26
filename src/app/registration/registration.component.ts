@@ -1,9 +1,9 @@
+// registration.component.ts
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FirebaseError } from 'firebase/app';
-import { AnimationOptions } from 'ngx-lottie';
 
 @Component({
   selector: 'app-registration',
@@ -17,7 +17,6 @@ export class RegistrationComponent {
   studentId: string = '';
   password: string = '';
 
-  // Alert properties
   showAlert = false;
   alertColor: string = '';
   alertMessage: string = '';
@@ -29,14 +28,6 @@ export class RegistrationComponent {
   ) {}
 
   ngOnInit(): void {}
-
-  lottieConfig: AnimationOptions = {
-    path: '../../assets/Animation - 1700761188855.json', // Update with the path to your Lottie file
-  };
-
-  animationCreated(animation: any): void {
-    console.log('Animation created:', animation);
-  }
 
   async register() {
     this.showAlert = false;
@@ -54,24 +45,30 @@ export class RegistrationComponent {
           studentId: this.studentId,
         });
         this.setAlert('success', 'Student Registered Successfully');
-        setTimeout(() => this.router.navigate(['/login']), 2000); // Redirect after 2 seconds
+        setTimeout(() => this.router.navigate(['/login']), 2000);
       } else {
         throw new Error('User creation failed');
       }
     } catch (error) {
       if (error instanceof FirebaseError) {
         this.setAlert('danger', 'Registration Failed: ' + error.message);
-      } else if (error instanceof Error) {
-        this.setAlert('danger', 'An unexpected error occurred: ' + error.message);
       } else {
         this.setAlert('danger', 'An unexpected error occurred. Please try again.');
       }
     }
   }
 
-  private setAlert(color: string, message: string) {
+  setAlert(color: string, message: string) {
     this.alertColor = color;
     this.alertMessage = message;
     this.showAlert = true;
+  }
+
+  clearForm() {
+    this.firstName = '';
+    this.lastName = '';
+    this.email = '';
+    this.studentId = '';
+    this.password = '';
   }
 }
