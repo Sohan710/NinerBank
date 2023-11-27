@@ -1,0 +1,20 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../out-tsc/e2e",
+    "module": "commonjs",
+    "target": "es2018",
+    "types": [
+      "jasmine",
+      "node"
+    ]
+  },
+  "files": [
+    "src/app.e2e-spec.ts",
+    "src/app.po.ts"
+  ],
+  "include": [
+    "src/**/*.e2e-spec.ts",
+    "src/**/*.po.ts"
+  ]
+}
